@@ -17,29 +17,31 @@ int main(int argc, char *argv[]){
     } 
     traced_process = atoi(argv[1]);
     ptrace(PTRACE_ATTACH, traced_process, NULL, NULL);
+    printf("Waiting for Syscall #1\n");
     wait(&status);
     ptrace(PTRACE_GETREGS, traced_process, NULL, &regs);
     ptrace(PTRACE_SYSCALL, traced_process, NULL, NULL);
     wait(&status);
     while (regs.orig_rax != 1){
         ptrace(PTRACE_GETREGS, traced_process, NULL, &regs);
-        printf("Syscall number: %d\n",regs.orig_rax);
+        //printf("Syscall number: %d\n",regs.orig_rax);
         ptrace(PTRACE_SYSCALL, traced_process, NULL, NULL);
         wait(&status);
     }
     while (regs.orig_rax == 1) {
         printf("Syscall number: %d\n",regs.orig_rax);
-        ins = ptrace(PTRACE_PEEKTEXT, traced_process, regs.rip, NULL);
-        printf("EIP: %lx Instruction executedL %s \n", regs.rip, &ins);
+        //ins = ptrace(PTRACE_PEEKTEXT, traced_process, regs.rip, NULL);
+        //printf("EIP: %lx Instruction executedL %s \n", regs.rip, &ins);
         printf("File descriptor number: %d\n", regs.rdi);
         printf("Buffer length: %d\n", regs.rdx);
         printf("Buffer data: %lx\n", regs.rsi);
         int counter = 0;
         int total_data = regs.rdx;
+        printf("La data posta: \n");
         while (counter * 8 < total_data){
             char *val;
             val = ptrace(PTRACE_PEEKDATA, traced_process, regs.rsi + (counter * 8), NULL);
-            printf("LA data posta: %s\n", &val);
+            printf("%s", &val);
            ++counter;
         }
         ptrace(PTRACE_SYSCALL, traced_process, NULL, NULL);
