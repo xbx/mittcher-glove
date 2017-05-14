@@ -37,7 +37,7 @@ int main(int argc, char *argv[]){
         printf("Buffer data: %lx\n", regs.rsi);
         int counter = 0;
         int total_data = regs.rdx;
-        printf("La data posta: \n");
+        printf("Printing output from error: \n");
         while (counter * 8 < total_data){
             char *val;
             val = ptrace(PTRACE_PEEKDATA, traced_process, regs.rsi + (counter * 8), NULL);
