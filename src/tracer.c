@@ -6,6 +6,8 @@
 #include <sys/user.h>
 #include <sys/reg.h>
 
+WORD_SIZE = 8;
+
 int main(int argc, char *argv[]){
     int status;
     pid_t traced_process;
@@ -24,25 +26,25 @@ int main(int argc, char *argv[]){
     wait(&status);
     while (regs.orig_rax != 1){
         ptrace(PTRACE_GETREGS, traced_process, NULL, &regs);
-        //printf("Syscall number: %d\n",regs.orig_rax);
         ptrace(PTRACE_SYSCALL, traced_process, NULL, NULL);
         wait(&status);
     }
     while (regs.orig_rax == 1) {
-        printf("Syscall number: %d\n",regs.orig_rax);
-        //ins = ptrace(PTRACE_PEEKTEXT, traced_process, regs.rip, NULL);
-        //printf("EIP: %lx Instruction executedL %s \n", regs.rip, &ins);
-        printf("File descriptor number: %d\n", regs.rdi);
-        printf("Buffer length: %d\n", regs.rdx);
-        printf("Buffer data: %lx\n", regs.rsi);
+        //printf("Syscall number: %d\n",regs.orig_rax);
+        //printf("File descriptor number: %d\n", regs.rdi);
+        //printf("Buffer length: %d\n", regs.rdx);
         int counter = 0;
         int total_data = regs.rdx;
+        ptrace(PTRACE_SYSCALL, traced_process, NULL, NULL);
+        wait(&status);
         printf("Printing output from error: \n");
-        while (counter * 8 < total_data){
-            char *val;
-            val = ptrace(PTRACE_PEEKDATA, traced_process, regs.rsi + (counter * 8), NULL);
-            printf("%s", &val);
-           ++counter;
+        while (counter < total_data){
+            char val[WORD_SIZE];
+            char *pval;
+            pval = val;
+            pval = ptrace(PTRACE_PEEKDATA, traced_process, regs.rsi + counter, NULL);
+            printf("%s", &pval);
+            counter = counter + WORD_SIZE;
         }
         ptrace(PTRACE_SYSCALL, traced_process, NULL, NULL);
         wait(&status);

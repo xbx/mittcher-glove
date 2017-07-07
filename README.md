@@ -1,4 +1,4 @@
-# Tiny Tracer
+# Mitcher Glove
 
 A simple application using **ptrace(2)** to capture the stderr of a process.
 
@@ -7,7 +7,7 @@ A simple application using **ptrace(2)** to capture the stderr of a process.
 ### Compilation
 
 ```sh
-gcc -o tiny-tracer.out ./src/tracer.c
+gcc -o mittcher-glove.out ./src/tracer.c
 ```
 
 ### Running an example
@@ -27,7 +27,7 @@ node tracee/node-error.js & #This would output a PID
 ```
 
 ```sh
-./tiny-tracer <pid_of_asd.py>
+sudo ./mittcher-glove <pid_of_asd.py>
 ```
 
 ## References
