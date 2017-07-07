@@ -1,6 +1,7 @@
 # Mittcher Glove
 
 ![Mittcher Glove Logo](logo.png)
+
 A simple application using **ptrace(2)** to capture the stderr of a process.
 
 ## How to use it
@@ -28,9 +29,10 @@ node tracee/node-error.js & #This would output a PID
 ```
 
 ```sh
-sudo ./mittcher-glove <pid_of_asd.py>
+sudo ./mittcher-glove <pid_of_running_process>
 ```
 
 ## References
 
-[My seminal question on StackOverflow](http://stackoverflow.com/43854398/read-the-stderr-of-a-process-using-ptrace2)
+[My seminal question on StackOverflow](
+  http://stackoverflow.com/43854398/read-the-stderr-of-a-process-using-ptrace2)
