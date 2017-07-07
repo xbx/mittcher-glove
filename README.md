@@ -1,5 +1,6 @@
-# Mitcher Glove
+# Mittcher Glove
 
+![Mittcher Glove Logo](logo.png)
 A simple application using **ptrace(2)** to capture the stderr of a process.
 
 ## How to use it
