@@ -5,8 +5,9 @@
 #include <stdio.h>
 #include <sys/user.h>
 #include <sys/reg.h>
+#include <stdlib.h>
 
-WORD_SIZE = 8;
+int WORD_SIZE = 8;
 
 int main(int argc, char *argv[]){
     int status;
@@ -43,7 +44,7 @@ int main(int argc, char *argv[]){
             char *pval;
             pval = val;
             pval = ptrace(PTRACE_PEEKDATA, traced_process, regs.rsi + counter, NULL);
-            printf("%s", &pval);
+            printf("%s", pval);
             counter = counter + WORD_SIZE;
         }
         ptrace(PTRACE_SYSCALL, traced_process, NULL, NULL);
