@@ -17,6 +17,8 @@ gcc -o mittcher-glove.out ./src/tracer.c
 These example programs will exit with an error after waiting some seconds.
 If you do not manage to go through the commands in time, then try again.
 
+![](http://recordit.co/fKvGsBRGX6)
+
 Python:
 
 ```sh
