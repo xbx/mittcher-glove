@@ -37,4 +37,4 @@ sudo ./mittcher-glove <pid_of_running_process>
 ## References
 
 [My seminal question on StackOverflow](
-  http://stackoverflow.com/43854398/read-the-stderr-of-a-process-using-ptrace2)
+  https://stackoverflow.com/questions/43854398/read-the-stderr-of-a-process-using-ptrace2)
